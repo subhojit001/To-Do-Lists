@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://thymeleaf.org">
+       <head>
+           <title>Todo Application</title>
+           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+       </head>
+       <body>
+       <h1> TODO Application</h1>
+       <form action="/add" method="post">
+           <input type="text" name="task" placeholder="write your task">
+           <button type="submit" class="btn btn-secondary">Add</button>
+       </form>
+
+       <ul>
+           <li th:each="todo : ${lists}">
+               <form th:action="@{/update/{id}(id=${todo.id})}" method="post">
+                 <input type="text" th:value="${todo.task}" name="task">
+                 <input type="checkbox" th:checked="${todo.status}" name="status" onchange="this.form.submit() ">
+                 <button type="submit" class="btn btn-primary">UPDATE</button>
+                  <button ><a th:href="@{/delete/{id}(id=${todo.id})} " class="btn btn-danger">delete</a> </button>
+               </form>
+
+           </li>
+       </ul>
+
+
+       </body>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+       </html>
